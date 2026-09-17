@@ -10,9 +10,9 @@
   --banner-bg: #000A6F;
   --banner-ink: #E1EDFF;
 
-  /* Fondo de página y tarjetas — mismo tono, se distinguen por el contorno */
-  --paper: #A9B4DB;
-  --paper-raised: #A9B4DB;
+  /* Fondo de página y tarjetas — claro y luminoso, con el contorno marcando cada bloque */
+  --paper: #F5F8FC;
+  --paper-raised: #FFFFFF;
 
   /* Texto */
   --ink: #000A6F;
@@ -43,23 +43,6 @@
 
   --shadow-soft: 0 8px 24px rgba(16, 24, 32, 0.07);
   --shadow-lift: 0 14px 34px rgba(16, 24, 32, 0.1);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --banner-bg: #000A6F;
-    --banner-ink: #E1EDFF;
-    --paper: #060B33;
-    --paper-raised: #10164D;
-    --ink: #E1EDFF;
-    --muted: #A9B4DB;
-    --line: #384393;
-    --accent: #717CB7;
-    --accent-soft: #10164D;
-    --accent2: #A9B4DB;
-    --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.4);
-    --shadow-lift: 0 14px 34px rgba(0, 0, 0, 0.5);
-  }
 }
 
 /* ---------- Reset ---------- */
@@ -147,7 +130,7 @@ main {
    HEADER — banner sólido (hero)
    ========================================================= */
 .title-block {
-  background: linear-gradient(135deg, var(--banner-bg) 0%, var(--accent) 100%);
+  background: var(--banner-bg);
   color: var(--banner-ink);
   box-shadow: var(--shadow-soft);
 }
@@ -177,9 +160,10 @@ main {
 .title-block__photo-ring::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -4px;
   border-radius: 50%;
-  border: 1.5px dashed color-mix(in srgb, var(--accent-soft) 80%, transparent);
+  border: 2px dashed var(--banner-ink);
+  opacity: 0.9;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -322,7 +306,7 @@ main {
 }
 .title-block__nav a:hover,
 .title-block__nav a:focus-visible {
-  color: var(--accent2);
+  color: var(--accent);
 }
 .title-block__nav a:hover::after,
 .title-block__nav a:focus-visible::after {
@@ -421,7 +405,7 @@ main {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--accent2);
+  color: var(--accent);
   margin-bottom: 0.55rem;
 }
 
@@ -441,11 +425,12 @@ main {
   border: 1px solid transparent;
   color: var(--banner-ink);
   background: var(--accent);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
 .btn:hover {
   background: var(--accent2);
+  color: var(--ink);
   transform: translateY(-2px);
   box-shadow: 0 10px 22px color-mix(in srgb, var(--accent2) 35%, transparent);
 }
@@ -536,7 +521,7 @@ main {
 }
 
 .pcb__tag--progress {
-  color: var(--accent2);
+  color: var(--accent);
   border: 1px solid var(--accent2);
   background: color-mix(in srgb, var(--accent-soft) 55%, transparent);
 }
@@ -623,7 +608,7 @@ main {
 }
 
 .bom__status--progress {
-  color: var(--accent2);
+  color: var(--accent);
   border: 1px solid var(--accent2);
   background: color-mix(in srgb, var(--accent-soft) 55%, transparent);
 }
@@ -742,7 +727,7 @@ main {
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 .contact__link:hover {
-  color: var(--accent2);
+  color: var(--accent);
   border-bottom-color: var(--accent2);
 }
 
@@ -766,3 +751,63 @@ main {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* =========================================================
+   AUDITORÍA DE CONTRASTE (WCAG AA) — resumen de cambios
+   =========================================================
+
+   CAUSA RAÍZ del "todo quedó oscuro":
+   Existía un bloque @media (prefers-color-scheme: dark) que
+   redefinía --paper y --paper-raised a tonos casi negros
+   (#060B33 / #10164D). En un sistema con tema oscuro activado,
+   esto oscurecía TODO el body y las tarjetas, no solo el banner.
+   Se eliminó por completo: ahora el sitio es siempre claro salvo
+   el banner, sin depender del tema del sistema operativo.
+
+   Banner (.title-block): tenía un linear-gradient de --banner-bg
+   a --accent, que en el sistema con tema oscuro se veía como una
+   franja oscuro-a-lavanda (--accent cambiaba a un tono más claro
+   en el bloque dark ya eliminado). Se cambió a --banner-bg sólido,
+   tal como pide la regla: banner oscuro fijo, sin degradado.
+
+   Fallas de contraste encontradas y corregidas (medidas sobre
+   fondo claro --paper/--paper-raised, mínimo 4.5:1 para texto):
+
+   1. Nav — hover de los links usaba --accent2 (#717CB7) como
+      color de TEXTO sobre fondo blanco: ~3.95:1, no llega a 4.5:1.
+      Cambiado a --accent (#384393): ~8.8:1. El subrayado decorativo
+      (::after) se dejó en --accent2 porque, al ser un elemento
+      gráfico y no texto, solo necesita 3:1 y sí lo cumple.
+
+   2. Botones — en :hover el fondo pasa a --accent2 (más claro) pero
+      el texto seguía en --banner-ink (claro): ~3.57:1, insuficiente.
+      Se cambió el texto a --ink en :hover: ~5:1, cumple.
+
+   3. Tags "en curso" / "en desarrollo" (.pcb__tag--progress,
+      .bom__status--progress) — usaban --accent2 como color de
+      texto sobre su fondo claro: ~3.57:1, insuficiente. Se cambió
+      el texto a --accent (~7.9:1) y se dejó el borde en --accent2
+      (los bordes son elementos gráficos, solo necesitan 3:1, y
+      --accent2 sí lo cumple) para conservar la diferencia visual
+      frente a los tags "gap"/"listo".
+
+   4. Subtítulos de las tarjetas del proyecto (.project__block h4,
+      ej. "EL PROBLEMA", "LOS DATOS") — en --accent2 sobre tarjeta
+      blanca: ~3.95:1, insuficiente para texto en mayúsculas de
+      12.8px. Cambiado a --accent: ~8.8:1.
+
+   5. Link de contacto en :hover — el texto completo cambiaba a
+      --accent2: ~3.7:1, insuficiente. Se separó: el texto del
+      enlace ahora usa --accent (seguro), y el subrayado inferior
+      y el ícono SVG se quedan en --accent2 (elementos gráficos,
+      cumplen el mínimo de 3:1 sin problema).
+
+   Verificado y SIN cambios (ya cumplían):
+   - Textos --ink y --muted sobre --paper/--paper-raised: >8:1.
+   - Barra de acento junto a los títulos de sección (--accent): ~8:1.
+   - Multímetro (AUC-ROC): dígitos y leyendas fijos sobre fondo
+     negro fijo, independientes del resto de la paleta: >5:1.
+   - Tags/estados "gap" y "ready" (usan --accent, no --accent2).
+   - Iconos de contacto en reposo y su hover (--accent / --accent2):
+     como son elementos gráficos, el mínimo es 3:1 y lo cumplen.
+   ========================================================= */
