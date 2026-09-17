@@ -24,4 +24,29 @@
       }
     });
   });
+
+  // Aparición progresiva de secciones al hacer scroll.
+  // Si no hay soporte de IntersectionObserver o el usuario prefiere menos
+  // movimiento, las secciones simplemente quedan visibles (comportamiento
+  // por defecto en el CSS), sin bloquear el contenido.
+  if (!prefersReducedMotion && "IntersectionObserver" in window) {
+    var revealTargets = document.querySelectorAll(".reveal");
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+    );
+
+    revealTargets.forEach(function (target) {
+      target.classList.add("will-animate");
+      observer.observe(target);
+    });
+  }
 })();
