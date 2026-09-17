@@ -1,0 +1,591 @@
+/* =========================================================
+   David Ávila — Portafolio
+   Identidad visual: plano técnico de ingeniería
+   ========================================================= */
+
+:root {
+  /* Paleta — modo claro */
+  --color-paper: #F4F6F5;
+  --color-surface: #FFFFFF;
+  --color-text: #101820;
+  --color-text-secondary: #55626C;
+  --color-line: #C9D3D8;
+  --color-copper: #A8571E;
+  --color-signal: #14795C;
+
+  /* Panel del multímetro — fijo, no cambia con el tema */
+  --meter-bg: #0B140F;
+  --meter-digit: #4CE0A6;
+
+  /* Tipografía */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "IBM Plex Sans", -apple-system, Segoe UI, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+  --radius-sm: 2px;
+  --content-max: 920px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-paper: #0D1418;
+    --color-surface: #121A1F;
+    --color-text: #E7ECEC;
+    --color-text-secondary: #93A3A9;
+    --color-line: #26343A;
+    --color-copper: #E2A063;
+    --color-signal: #4CE0A6;
+  }
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--color-copper); }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; margin: 0; }
+p { margin: 0 0 0.9em; }
+p:last-child { margin-bottom: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Fondo de papel de plano ---------- */
+.blueprint-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.35;
+}
+
+@media (prefers-color-scheme: dark) {
+  .blueprint-grid { opacity: 0.22; }
+}
+
+/* ---------- Layout general de secciones ---------- */
+main {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: 3.5rem 0;
+  border-bottom: 1px solid var(--color-line);
+}
+.section:last-of-type { border-bottom: none; }
+
+.section__heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 1.5rem;
+}
+
+.section__index {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-copper);
+  border: 1px solid var(--color-line);
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-sm);
+}
+
+.section__intro {
+  color: var(--color-text-secondary);
+  max-width: 60ch;
+  margin-bottom: 2rem;
+}
+
+.lede {
+  font-size: 1.05rem;
+  max-width: 68ch;
+}
+
+/* =========================================================
+   HEADER — cajetín de plano técnico (title block)
+   ========================================================= */
+.title-block {
+  border-bottom: 2px solid var(--color-text);
+  background: var(--color-surface);
+}
+
+.title-block__inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem 1.25rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.title-block__photo {
+  width: 92px;
+  height: 92px;
+  border: 1px solid var(--color-line);
+  background: var(--color-paper);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.title-block__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.title-block__photo.photo-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.title-block__photo.photo-fallback::after {
+  content: "DA";
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  color: var(--color-text-secondary);
+}
+
+.title-block__id {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.tb-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.tb-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}
+
+.tb-value {
+  font-size: 0.95rem;
+}
+
+.tb-value--name {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.tb-value--status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-secondary);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-signal);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-signal) 20%, transparent);
+}
+
+.title-block__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  border-left: 1px solid var(--color-line);
+  padding-left: 1.25rem;
+}
+
+.title-block__nav {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 1.5rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.title-block__nav a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+.title-block__nav a:hover,
+.title-block__nav a:focus-visible {
+  color: var(--color-copper);
+  border-bottom-color: var(--color-copper);
+}
+
+@media (max-width: 640px) {
+  .title-block__inner {
+    grid-template-columns: auto 1fr;
+  }
+  .title-block__meta {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--color-line);
+    padding-top: 0.75rem;
+    gap: 1.5rem;
+  }
+}
+
+/* =========================================================
+   PROYECTO DESTACADO
+   ========================================================= */
+.project__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.project__title {
+  font-size: 1.3rem;
+  max-width: 34ch;
+}
+
+/* Panel tipo multímetro digital */
+.meter {
+  background: var(--meter-bg);
+  border: 1px solid #000;
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 220px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04), 0 2px 6px rgba(0,0,0,0.25);
+}
+
+.meter__label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: #6b8f83;
+  text-transform: uppercase;
+}
+
+.meter__value {
+  font-family: var(--font-mono);
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--meter-digit);
+  line-height: 1.1;
+  text-shadow: 0 0 8px color-mix(in srgb, var(--meter-digit) 55%, transparent);
+}
+
+.meter__sub {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #6b8f83;
+  letter-spacing: 0.04em;
+}
+
+.project__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.project__block h4 {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-copper);
+  margin-bottom: 0.5rem;
+}
+
+.project__block p {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-decoration: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid currentColor;
+  letter-spacing: 0.02em;
+}
+
+.btn--primary {
+  color: var(--color-signal);
+  border-color: var(--color-signal);
+}
+.btn--primary:hover { background: color-mix(in srgb, var(--color-signal) 12%, transparent); }
+
+.btn--accent {
+  color: var(--color-copper);
+  border-color: var(--color-copper);
+}
+.btn--accent:hover { background: color-mix(in srgb, var(--color-copper) 12%, transparent); }
+
+/* =========================================================
+   HOJA DE RUTA — traza de circuito (PCB)
+   ========================================================= */
+.pcb {
+  position: relative;
+  padding-left: 2.75rem;
+}
+
+.pcb::before {
+  content: "";
+  position: absolute;
+  left: 0.95rem;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 2px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-signal) 0,
+    var(--color-signal) 6px,
+    transparent 6px,
+    transparent 11px
+  );
+}
+
+.pcb__node {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px dashed var(--color-line);
+}
+.pcb__node:last-child { border-bottom: none; }
+
+.pcb__marker {
+  position: absolute;
+  left: -2.75rem;
+  width: 2.3rem;
+  height: 2.3rem;
+  border: 2px solid var(--color-signal);
+  border-radius: 50%;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-signal);
+  flex-shrink: 0;
+}
+
+.pcb__content {
+  flex: 1 1 320px;
+}
+
+.pcb__content h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}
+
+.pcb__content p {
+  color: var(--color-text-secondary);
+  font-size: 0.92rem;
+}
+
+.pcb__tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pcb__tag--progress {
+  color: var(--color-copper);
+  border: 1px solid var(--color-copper);
+}
+
+.pcb__tag--gap {
+  color: var(--color-signal);
+  border: 1px solid var(--color-signal);
+}
+
+@media (max-width: 480px) {
+  .pcb { padding-left: 2.25rem; }
+  .pcb::before { left: 0.75rem; }
+  .pcb__marker { left: -2.25rem; width: 1.9rem; height: 1.9rem; font-size: 0.72rem; }
+}
+
+/* =========================================================
+   HERRAMIENTAS — tabla estilo BOM (bill of materials)
+   ========================================================= */
+.bom-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-line);
+}
+
+.bom {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  min-width: 480px;
+}
+
+.bom caption { caption-side: top; }
+
+.bom th {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: left;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.bom td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-line);
+  vertical-align: top;
+}
+
+.bom tr:last-child td { border-bottom: none; }
+
+.bom__item {
+  font-family: var(--font-mono);
+  color: var(--color-text-secondary);
+  width: 3rem;
+}
+
+.bom__tool {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bom__status {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.bom__status--ready {
+  color: var(--color-signal);
+  border: 1px solid var(--color-signal);
+}
+
+.bom__status--progress {
+  color: var(--color-copper);
+  border: 1px solid var(--color-copper);
+}
+
+/* =========================================================
+   CONTACTO
+   ========================================================= */
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.contact__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.contact__list li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+}
+
+.contact__label {
+  color: var(--color-text-secondary);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  min-width: 5.5rem;
+}
+
+.contact__list a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-line);
+}
+.contact__list a:hover { border-bottom-color: var(--color-copper); }
+
+/* =========================================================
+   FOOTER — bloque de firma de plano técnico
+   ========================================================= */
+.sign-block {
+  border-top: 2px solid var(--color-text);
+  background: var(--color-surface);
+}
+
+.sign-block__inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+}
+
+.sign-block .tb-value {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}

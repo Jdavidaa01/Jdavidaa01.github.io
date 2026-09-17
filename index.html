@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David Ávila · Data Analyst / Data Scientist Jr.</title>
+<meta name="description" content="Portafolio de David Ávila — Ingeniería Eléctrica + Data Science. Predicción de churn, SQL, BI y proyectos en construcción.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="blueprint-grid" aria-hidden="true"></div>
+
+<header class="title-block" id="inicio">
+  <div class="title-block__inner">
+    <div class="title-block__photo">
+      <!-- TODO: reemplazar con la foto real. Coloca el archivo en assets/foto.jpg -->
+      <img src="assets/foto.jpg" alt="David Ávila" onerror="this.style.display='none'; this.parentElement.classList.add('photo-fallback')">
+    </div>
+
+    <div class="title-block__id">
+      <span class="tb-field">
+        <span class="tb-label">NOMBRE</span>
+        <span class="tb-value tb-value--name">David Ávila</span>
+      </span>
+      <span class="tb-field">
+        <span class="tb-label">ROL</span>
+        <span class="tb-value">Data Analyst / Data Scientist Jr. en formación · Ingeniería Eléctrica (8vo semestre)</span>
+      </span>
+      <span class="tb-field">
+        <span class="tb-label">UBICACIÓN</span>
+        <span class="tb-value">Cuenca, Ecuador — disponible para remoto</span>
+      </span>
+      <span class="tb-field">
+        <span class="tb-label">ESTADO</span>
+        <span class="tb-value tb-value--status">
+          <span class="status-dot" aria-hidden="true"></span>
+          construyendo activamente 4 proyectos de portafolio orientados a lo que el mercado pide hoy
+        </span>
+      </span>
+    </div>
+
+    <div class="title-block__meta">
+      <span class="tb-field">
+        <span class="tb-label">ESC.</span>
+        <span class="tb-value">1:1</span>
+      </span>
+      <span class="tb-field">
+        <span class="tb-label">HOJA</span>
+        <span class="tb-value">01 / 01</span>
+      </span>
+      <span class="tb-field">
+        <span class="tb-label">REV.</span>
+        <span class="tb-value">02</span>
+      </span>
+    </div>
+  </div>
+
+  <nav class="title-block__nav" aria-label="Navegación principal">
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="#proyecto">Proyecto</a>
+    <a href="#hoja-de-ruta">Hoja de ruta</a>
+    <a href="#herramientas">Herramientas</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="section" id="sobre-mi">
+    <h2 class="section__heading"><span class="section__index">§1</span> Sobre mí</h2>
+    <div class="section__body">
+      <p class="lede">
+        Combino la precisión de la ingeniería eléctrica con el análisis de datos. Vengo del bootcamp de
+        <strong>TripleTen (Data Science)</strong>, 100% completado y certificado, y ahora estoy cerrando la
+        brecha entre lo que aprendí ahí —fuerte en Machine Learning— y lo que pide el mercado real para roles
+        junior: SQL, BI y Excel.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="proyecto">
+    <h2 class="section__heading"><span class="section__index">§2</span> Proyecto destacado</h2>
+
+    <article class="project">
+      <div class="project__header">
+        <h3 class="project__title">Predicción de churn — Interconnect (Telecom)</h3>
+        <div class="meter" role="img" aria-label="Métrica AUC-ROC en test: 0.8404">
+          <span class="meter__label">AUC-ROC · TEST</span>
+          <span class="meter__value">0.8404</span>
+          <span class="meter__sub">MODELO: REGRESIÓN LOGÍSTICA</span>
+        </div>
+      </div>
+
+      <div class="project__grid">
+        <div class="project__block">
+          <h4>El problema</h4>
+          <p>Interconnect, un operador de telecomunicaciones, necesita anticipar qué clientes están por
+          cancelar su servicio (churn) para poder ofrecerles promociones y planes de retención antes de que
+          se vayan.</p>
+        </div>
+
+        <div class="project__block">
+          <h4>Los datos</h4>
+          <p>Contratos, información personal, servicios de internet y servicios telefónicos, combinados en
+          un único dataset de clientes con variables demográficas, de facturación y de uso de servicios.</p>
+        </div>
+
+        <div class="project__block">
+          <h4>El enfoque</h4>
+          <p>Limpieza y unión de las cuatro fuentes, ingeniería de variables (antigüedad, tipo de contrato,
+          método de pago) y comparación de varios modelos de clasificación: Regresión Logística, Árbol de
+          Decisión, Bosque Aleatorio, LightGBM, CatBoost y XGBoost, con ajuste de hiperparámetros.</p>
+        </div>
+
+        <div class="project__block">
+          <h4>La evaluación en simple</h4>
+          <p>0.8404 de AUC-ROC significa que, comparando dos clientes al azar —uno que cancela y otro que
+          no— el modelo identifica correctamente cuál es el que cancela en el 84% de los casos.</p>
+        </div>
+
+        <div class="project__block">
+          <h4>Qué aprendí y sus límites</h4>
+          <p>El modelo más simple (Regresión Logística) venció a los modelos de boosting más complejos
+          (LightGBM, CatBoost, XGBoost) en esta métrica, un recordatorio de que más complejidad no siempre
+          gana. El límite principal: el dataset es estático y no captura cambios de comportamiento recientes
+          del cliente ni señales de soporte técnico.</p>
+        </div>
+
+        <div class="project__block">
+          <h4>Siguiente paso</h4>
+          <p>Separar este proyecto en un repositorio público independiente del repo privado de TripleTen, y
+          construir un dashboard de BI sobre estos mismos resultados (ver hoja de ruta, ítem 03).</p>
+        </div>
+      </div>
+
+      <!-- TODO: reemplazar href="#" con la URL del repo público cuando se separe del repo privado de TripleTen -->
+      <a class="btn btn--primary" href="#" target="_blank" rel="noopener">Ver repositorio en GitHub →</a>
+    </article>
+  </section>
+
+  <section class="section" id="hoja-de-ruta">
+    <h2 class="section__heading"><span class="section__index">§3</span> Hoja de ruta</h2>
+    <p class="section__intro">Cuatro proyectos en construcción, diseñados para cerrar brechas puntuales entre mi formación y lo que piden las vacantes junior.</p>
+
+    <ol class="pcb">
+      <li class="pcb__node">
+        <span class="pcb__marker">01</span>
+        <div class="pcb__content">
+          <h3>Limpieza y EDA de fundamentos</h3>
+          <p>Dataset de cafetería, deliberadamente sucio: nulos, duplicados y outliers.</p>
+        </div>
+        <span class="pcb__tag pcb__tag--progress">en curso</span>
+      </li>
+
+      <li class="pcb__node">
+        <span class="pcb__marker">02</span>
+        <div class="pcb__content">
+          <h3>SQL sobre base Chinook</h3>
+          <p>15 consultas progresivas, de joins simples a subconsultas y funciones de ventana.</p>
+        </div>
+        <span class="pcb__tag pcb__tag--gap">cierra brecha · SQL 72%</span>
+      </li>
+
+      <li class="pcb__node">
+        <span class="pcb__marker">03</span>
+        <div class="pcb__content">
+          <h3>Dashboard de BI sobre el proyecto de churn</h3>
+          <p>Extracción vía SQL y visualización en Power BI de los resultados del modelo de Interconnect.</p>
+        </div>
+        <span class="pcb__tag pcb__tag--gap">cierra brecha · BI 40%</span>
+      </li>
+
+      <li class="pcb__node">
+        <span class="pcb__marker">04</span>
+        <div class="pcb__content">
+          <h3>Excel avanzado + limpieza</h3>
+          <p>Dataset de e-commerce Olist: tablas dinámicas y un dashboard simple.</p>
+        </div>
+        <span class="pcb__tag pcb__tag--gap">cierra brecha · Excel 35%</span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section" id="herramientas">
+    <h2 class="section__heading"><span class="section__index">§4</span> Herramientas</h2>
+
+    <div class="bom-wrap">
+      <table class="bom">
+        <caption class="sr-only">Lista de materiales — herramientas y nivel de dominio</caption>
+        <thead>
+          <tr>
+            <th scope="col">Ítem</th>
+            <th scope="col">Herramienta</th>
+            <th scope="col">Detalle</th>
+            <th scope="col">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="bom__item">01</td>
+            <td class="bom__tool">Python</td>
+            <td>pandas, scikit-learn</td>
+            <td><span class="bom__status bom__status--ready">dominado</span></td>
+          </tr>
+          <tr>
+            <td class="bom__item">02</td>
+            <td class="bom__tool">Estadística</td>
+            <td>inferencial, EDA</td>
+            <td><span class="bom__status bom__status--ready">dominado</span></td>
+          </tr>
+          <tr>
+            <td class="bom__item">03</td>
+            <td class="bom__tool">Machine Learning</td>
+            <td>clasificación, regresión, NLP, CNN</td>
+            <td><span class="bom__status bom__status--ready">dominado</span></td>
+          </tr>
+          <tr>
+            <td class="bom__item">04</td>
+            <td class="bom__tool">SQL</td>
+            <td>consultas progresivas sobre Chinook</td>
+            <td><span class="bom__status bom__status--progress">en desarrollo</span></td>
+          </tr>
+          <tr>
+            <td class="bom__item">05</td>
+            <td class="bom__tool">Power BI</td>
+            <td>dashboard sobre el proyecto de churn</td>
+            <td><span class="bom__status bom__status--progress">en desarrollo</span></td>
+          </tr>
+          <tr>
+            <td class="bom__item">06</td>
+            <td class="bom__tool">Excel avanzado</td>
+            <td>tablas dinámicas, dashboard sobre dataset Olist</td>
+            <td><span class="bom__status bom__status--progress">en desarrollo</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="contacto">
+    <h2 class="section__heading"><span class="section__index">§5</span> Contacto / CV</h2>
+
+    <div class="contact">
+      <ul class="contact__list">
+        <li>
+          <span class="contact__label">Email</span>
+          <a href="mailto:jdavidaa.01@gmail.com">jdavidaa.01@gmail.com</a>
+        </li>
+        <li>
+          <span class="contact__label">LinkedIn</span>
+          <a href="https://www.linkedin.com/in/jdavidaa01/" target="_blank" rel="noopener">linkedin.com/in/jdavidaa01</a>
+        </li>
+        <li>
+          <span class="contact__label">GitHub</span>
+          <a href="https://github.com/Jdavidaa01" target="_blank" rel="noopener">github.com/Jdavidaa01</a>
+        </li>
+      </ul>
+
+      <!-- TODO: subir el PDF real del CV a assets/CV_David_Avila.pdf -->
+      <a class="btn btn--accent" href="assets/CV_David_Avila.pdf" target="_blank" rel="noopener" download>Descargar CV ↓</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="sign-block">
+  <div class="sign-block__inner">
+    <span class="tb-field">
+      <span class="tb-label">DIBUJADO POR</span>
+      <span class="tb-value">David Ávila</span>
+    </span>
+    <span class="tb-field">
+      <span class="tb-label">FECHA</span>
+      <span class="tb-value">sept 2026</span>
+    </span>
+    <span class="tb-field">
+      <span class="tb-label">REV.</span>
+      <span class="tb-value">02</span>
+    </span>
+    <span class="tb-field">
+      <span class="tb-label">FORMATO</span>
+      <span class="tb-value">A4 · WEB</span>
+    </span>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
